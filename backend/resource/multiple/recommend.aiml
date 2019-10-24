@@ -1,0 +1,32 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>#换#</pattern>
+        <template>
+            task_book_recommend
+        </template>
+    </category>
+    <category>
+        <pattern>#不喜欢#</pattern>
+        <template>
+            task_book_other_recommend
+        </template>
+    </category>
+    <category>
+        <pattern>#还有#</pattern>
+        <template>
+            task_book_recommend
+        </template>
+    </category>
+    <category>
+        <pattern>#有#别#</pattern>
+        <template>
+            task_book_other_recommend
+        </template>
+    </category>
+    <category>
+        <pattern>*</pattern>
+        <template>
+            task_end_multiple_normal
+        </template>
+    </category>
+</aiml>

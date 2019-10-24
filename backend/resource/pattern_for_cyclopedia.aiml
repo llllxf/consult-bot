@@ -1,0 +1,190 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <!-- 核心词汇 -->
+    <category>
+        <pattern>#HED#</pattern>
+        <template>
+            task_HED
+        </template>
+    </category>
+    <category>
+        <pattern>#SBV#</pattern>
+        <template>
+            task_SBV
+        </template>
+    </category>
+
+    <!-- 核心词汇及其依附对象 -->
+    <category>
+        <pattern>#ATT#HED#</pattern>
+        <template>
+            task_ATT_HED
+        </template>
+    </category>
+
+    <!-- 主语和介词宾语 -->
+    <category>
+        <pattern>#SBV#HED#POB#</pattern>
+        <template>
+            task_SBV_POB
+        </template>
+    </category>
+    <!-- 主语和动词宾语 -->
+    <category>
+        <pattern>#SBV#HED#VOB#</pattern>
+        <template>
+            task_SBV_VOB
+        </template>
+    </category>
+
+
+    <!-- 主语及其依附对象，代词和介词宾语 -->
+    <category>
+        <pattern>#ATT#SBV#HED#POB#</pattern>
+        <template>
+            task_ATT_SBV_POB
+        </template>
+    </category>
+
+    <!-- 主语及其依附对象，代词和动词宾语 -->
+    <category>
+        <pattern>#ATT#SBV#HED#VOB#</pattern>
+        <template>
+            task_ATT_SBV_VOB
+        </template>
+    </category>
+    <!-- 主语及其依附对象，代词和动词宾语 -->
+    <category>
+        <pattern>#ATT#HED#VOB#</pattern>
+        <template>
+            task_ATT_ADV_VOB
+        </template>
+    </category>
+
+    <!-- 主语，疑问代词和动词宾语，以及宾语的依附对象 -->
+    <category>
+        <pattern>#SBV#HED#ATT#VOB#</pattern>
+        <template>
+            task_SBV_ATT_VOB
+        </template>
+    </category>
+
+    <!-- 主语，疑问代词和介词宾语，以及宾语的依附对象 -->
+    <category>
+        <pattern>#SBV#HED#ATT#POB#</pattern>
+        <template>
+            task_SBV_ATT_POB
+        </template>
+    </category>
+
+    <!-- 状语（疑问代词），主语和核心词汇 -->
+    <!--
+    <category>
+        <pattern>#ADV#SBV#HED#</pattern>
+        <template>
+            task_ADV_SBV_HED
+        </template>
+    </category>
+    -->
+
+    <!-- 状语（疑问代词），核心词汇，兼语（动词的第一对象）和宾语 -->
+    <!--
+    <category>
+        <pattern>#ADV#HED#DBL#VOB#</pattern>
+        <template>
+            task_ADV_HED_DBL_VOB
+        </template>
+    </category>
+    -->
+
+    <!-- 状语（疑问代词），主语，状语和核心词汇（主语状态） -->
+    <!--
+    <category>
+        <pattern>#ADV#SBV#ADV#HED#</pattern>
+        <template>
+            task_ADV_SBV_ADV_HED
+        </template>
+    </category>
+    -->
+
+    <!--主语，状语和核心词汇（主语状态） -->
+    <!--
+    <category>
+        <pattern>#SBV#ADV#HED#</pattern>
+        <template>
+            task_SBV_ADV_HED
+        </template>
+    </category>
+    -->
+
+    <!-- 主语（被动），状语（疑问代词）和核心词汇（动词） -->
+    <!--
+    <category>
+        <pattern>#SBV#ADV#HED</pattern>
+        <template>
+            task_SBV_ADV
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SBV#HED#VOB#COO#</pattern>
+        <template>
+            task_SBV_VOB_COO
+        </template>
+    </category>
+    -->
+    <category>
+        <pattern>#SBV#HED#SBV#VOB#</pattern>
+        <template>
+            task_SBV_HED_SBV_VOB
+        </template>
+    </category>
+
+
+
+
+    <!--
+    <category>
+        <pattern>#SBV#HED#POB#</pattern>
+        <template>
+            1
+        </template>
+    </category>
+
+    <category>
+        <pattern>SBV#HED#VOB</pattern>
+        <template>
+            1
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SBV#HED#ATT#VOB#</pattern>
+        <template>
+            1
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SBV#HED#ATT#POB#</pattern>
+        <template>
+            1
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SBV#ADV#HED#</pattern>
+        <template>
+            2
+        </template>
+    </category>
+
+    <category>
+        <pattern>#SBV#HED#VOB#COO#</pattern>
+        <template>
+            2
+        </template>
+    </category>
+    -->
+
+
+</aiml>
