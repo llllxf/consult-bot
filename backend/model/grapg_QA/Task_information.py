@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.kb_prepare.neo4j_prepare2 import Neo4jPrepare
+from model.config import GraphBaseConfig
 class Task_information():
     '''
     def solve_room_borrow(self,entity):
@@ -73,9 +74,9 @@ class Task_information():
         return ans
 
     def solve_library_phone(self):
-        res = Neo4jPrepare.get_property("国家图书馆")
+        res = Neo4jPrepare.get_property(GraphBaseConfig['place'])
         #print(res)
-        ans = "\n国家图书馆联系电话为"+res['phone']+"\n"
+        ans = "\n"+GraphBaseConfig['place']+"联系电话为"+res['phone']+"\n"
         return ans
 
 
@@ -96,13 +97,13 @@ class Task_information():
 
             res = Neo4jPrepare.get_property(resource)
             if res['collection_time'] != 'nan':
-                ans += "国家图书馆的"+resource+"始藏于"+str(int(float(res['collection_time'])))+"年\n"
+                ans += GraphBaseConfig['place']+"的"+resource+"始藏于"+str(int(float(res['collection_time'])))+"年\n"
             if res['describe'] != 'nan':
                 ans += res['describe']+"\n"
             if res['belong'] != 'nan':
                 ans += resource+"属于"+res['belong']
             if res['form'] != 'nan':
-                ans += ",图书馆收藏"+resource+"包括:"+res['form']
+                ans += ","+GraphBaseConfig['place']+"收藏"+resource+"包括:"+res['form']
             if res['topic'] != 'nan':
                 ans += "\n涵盖的主题包括"+res['topic']+"\n"
             if ans == "" :
@@ -143,7 +144,7 @@ class Task_information():
         ans="\n"
 
         if restype_search['count'] != 'nan':
-            ans += restype+"在国家图书馆的馆藏数量为:"+restype_search['count']+"\n"
+            ans += restype+"在"+GraphBaseConfig['place']+"的馆藏数量为:"+restype_search['count']+"\n"
         if restype_search['describe'] != 'nan':
             ans += restype_search['describe']+"\n"
             return ans
@@ -186,7 +187,7 @@ class Task_information():
         return ans
 
     def solve_library_describe(self):
-        res = Neo4jPrepare.get_entity("国家图书馆")
+        res = Neo4jPrepare.get_entity(GraphBaseConfig['place'])
         ans = "\n"+res[0]['describe']
         return ans
 
@@ -388,7 +389,7 @@ class Task_information():
         res = Neo4jPrepare.get_property(resource)
         ans = "\n"
         if res['form'] != 'nan':
-            ans +=" 图书馆收藏的"+resource+"包括"+res['form']+"\n"
+            ans += GraphBaseConfig['place']+"收藏的"+resource+"包括"+res['form']+"\n"
         else:
             ans += "很抱歉，暂时没有"+resource+"的形式信息\n"
         return ans

@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# File: general_hub_1.py
-# Author: Hualong Zhang <nankaizhl@gmail.com>
-# CreateDate: 19-03-09
 import os
 import sys
 # 模块路径引用统一回退到Libbot目录下
@@ -74,7 +71,6 @@ class MainHandler(tornado.web.RequestHandler):
             user.set_sex(sex)
             user.set_age(age)
             GeneralHub.set_user(user)
-            #GeneralHub.set_age_sex(age,sex)
             res_dict = {'response': "已连接"}
             res_json = json.dumps(res_dict)
             print(res_json)

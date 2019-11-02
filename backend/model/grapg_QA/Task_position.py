@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.kb_prepare.neo4j_prepare2 import Neo4jPrepare
+from model.config import GraphBaseConfig
 import numpy as np
 import matplotlib.pyplot as plt
 import skimage.io as io
@@ -536,7 +537,7 @@ class Task_position():
             else:
                 ans += "进行"+service+"\n"
         else:
-            ans += "图书馆提供"+service+"\n"
+            ans += GraphBaseConfig['place']+"提供"+service+"\n"
         return ans
 
     """
@@ -558,7 +559,7 @@ class Task_position():
             else:
                 ans += "进行" + service + "\n"
         else:
-            ans += "很抱歉，国家图书馆不提供" + service + "\n"
+            ans += "很抱歉，"+GraphBaseConfig['place']+"不提供" + service + "\n"
         return ans
 
     """

@@ -2,8 +2,8 @@
 from model.kb_prepare.neo4j_prepare2 import Neo4jPrepare
 import numpy as np
 import random
+from model.config import GraphBaseConfig
 class Task_business():
-
 
 
     """
@@ -33,7 +33,7 @@ class Task_business():
 
     def solve_recommend_book2(self, age, sex):
         kind = self.get_kind(age,sex)
-        ans = "猜测您可能喜欢"+kind+"类书籍,图书馆有"
+        ans = "猜测您可能喜欢"+kind+"类书籍,"+GraphBaseConfig['place']+"有"
         goods = Neo4jPrepare.get_entity_for_kind('精品',kind)
         for g in goods:
             ans += g['office_name']+",存放在"
@@ -43,7 +43,7 @@ class Task_business():
 
     def solve_recommend_book(self, age, sex):
         kind = self.get_kind(age,sex)
-        ans = "猜测您可能喜欢"+kind+"类书籍,图书馆有"
+        ans = "猜测您可能喜欢"+kind+"类书籍,"+GraphBaseConfig['place']+"有"
         goods = Neo4jPrepare.get_entity_for_kind('精品', kind)
         good_index = random.randint(0, len(goods) - 1)
         g = goods[good_index]
@@ -55,7 +55,7 @@ class Task_business():
 
     def solve_recommend_book_other(self):
 
-        ans = "推荐你借阅图书馆的"
+        ans = "推荐你借阅"+GraphBaseConfig['place']+"的"
         goods = Neo4jPrepare.get_entity_for_kind('精品','其他')
         good_index = random.randint(0, len(goods)-1)
         g = goods[good_index]
@@ -73,14 +73,14 @@ class Task_business():
         #res = Neo4jPrepare.get_property(service)
         ans = "\n"
         if len(service)>0:
-            ans += "国家图书馆提供"+service[0]+"\n"
+            ans += GraphBaseConfig['place']+"提供"+service[0]+"\n"
             room = Neo4jPrepare.get_relation(service[0], "馆室")
             ans = "\n" + "您可以去"
             for r in room[:-1]:
                 ans += r['office_name'] + ","
             ans += room[-1]['office_name'] + "接受该服务\n"
         else:
-            ans += "很抱歉，国家图书馆不提供该服务"
+            ans += "很抱歉，"+GraphBaseConfig['place']+"不提供该服务"
         return ans
 
     """
@@ -93,14 +93,14 @@ class Task_business():
         # res = Neo4jPrepare.get_property(service)
         ans = "\n"
         if len(service) > 0:
-            ans += "国家图书馆提供" + service[0] + "\n"
+            ans += GraphBaseConfig['place']+"提供" + service[0] + "\n"
             room = Neo4jPrepare.get_relation(service[0], "馆室")
             ans = "\n" + "您可以去"
             for r in room[:-1]:
                 ans += r['office_name'] + ","
             ans += room[-1]['office_name'] + "接受该服务\n"
         else:
-            ans += "很抱歉，国家图书馆不提供该服务"
+            ans += "很抱歉，"+GraphBaseConfig['place']+"不提供该服务"
         return ans
 
 
@@ -349,9 +349,9 @@ class Task_business():
         res_res = Neo4jPrepare.get_relation(resource,'馆室')
         print(res_res)
         if len(res_res)>0:
-            ans += resource+"存放于"+res_res[0]['office_name']+",请前往"+res_res[0]['office_name']+"归还书籍,同时你也可以前往总馆南区24小时自助还书处归还书籍\n"
+            ans += resource+"存放于"+res_res[0]['office_name']+",请前往"+res_res[0]['office_name']+"归还书籍,同时你也可以前往24小时自助还书处归还书籍\n"
         else:
-            ans += '你可以前往总馆南区24小时自助还书处归还书籍\n'
+            ans += '你可以前往24小时自助还书处归还书籍\n'
         return ans
 
     """
@@ -362,7 +362,7 @@ class Task_business():
     def solve_res_search(self,entity):
         resource = entity['res'][0]
 
-        ans = "\n国家图书馆提供目录查询服务，您可以前往目录查询区查询\n"
+        ans = "\n"+GraphBaseConfig['place']+"提供目录查询服务，您可以前往目录查询区查询\n"
         room_res_search = Neo4jPrepare.get_relation('目录服务', '馆室')
         res_search = [x['office_name'] for x in room_res_search]
         room = Neo4jPrepare.get_relation(resource, '馆室')
@@ -405,19 +405,6 @@ class Task_business():
             return "年龄13-15岁的读者可以持国家图书馆读者卡借阅书籍\n"
         else:
             return "年龄未满13岁的读者可以持少年儿童读者卡借阅书籍\n"
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     '''
     办理读者卡

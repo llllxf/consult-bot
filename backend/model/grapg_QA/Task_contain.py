@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.kb_prepare.neo4j_prepare2 import Neo4jPrepare
 import numpy as np
+from model.config import GraphBaseConfig
 class Task_contain():
 
     """
@@ -323,7 +324,7 @@ class Task_contain():
     def solve_res_library(self, entity):
 
         res = entity['res'][0]
-        ans = "国家图书馆有"+res+",存放在"
+        ans = GraphBaseConfig['place']+"的"+res+",存放在"
         room = Neo4jPrepare.get_relation(res,'馆室')
         room_arr = [x['office_name'] for x in room]
         for room_name in room_arr[:-1]:
@@ -334,7 +335,7 @@ class Task_contain():
     def solve_goods_library(self, entity):
 
         goods = entity['goods'][0]
-        ans = "国家图书馆有"+goods+",存放在"
+        ans = GraphBaseConfig['place']+"有"+goods+",存放在"
         room = Neo4jPrepare.get_relation(goods,'馆室')
         room_arr = [x['office_name'] for x in room]
         for room_name in room_arr[:-1]:
@@ -549,9 +550,9 @@ class Task_contain():
     国图有几个馆区
     """
     def solve_library_area(self):
-        res = Neo4jPrepare.get_relation("国家图书馆","馆区")
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'],"馆区")
         print(res)
-        ans = "\n国家图书馆包括"
+        ans = "\n"+GraphBaseConfig['place']+"包括"
         for r in res[:-1]:
             ans += r['office_name']+","
         ans += res[-1]['office_name']+"\n"
@@ -564,7 +565,7 @@ class Task_contain():
     def solve_library_res_a(self):
         area = Neo4jPrepare.get_entity("馆区")
         area_arr = [sub_area['office_name'] for sub_area in area]
-        ans = "三个馆舍在资源和服务方面各有侧重。\n"
+        ans = GraphBaseConfig['place']+"各个馆舍在资源和服务方面各有侧重。\n"
 
         for sub_area in area_arr:
             resource_arr = Neo4jPrepare.get_area_resource_type(sub_area)
@@ -585,7 +586,7 @@ class Task_contain():
         # res = Neo4jPrepare.get_property(service)
         ans = "\n"
         if len(service) > 0:
-            ans += "国家图书馆提供" + service[0] + "\n"
+            ans += GraphBaseConfig['place']+"提供" + service[0] + "\n"
             #print("aaa",ans)
             room = Neo4jPrepare.get_relation(service[0], "馆室")
             if len(room)<=0:
@@ -595,7 +596,7 @@ class Task_contain():
                 ans += r['office_name'] + ","
             ans += room[-1]['office_name'] + "接受该服务\n"
         else:
-            ans += "很抱歉，国家图书馆不提供该服务"
+            ans += "很抱歉，"+GraphBaseConfig['place']+"不提供该服务"
         return ans
 
     """
@@ -608,7 +609,7 @@ class Task_contain():
         # res = Neo4jPrepare.get_property(service)
         ans = "\n"
         if len(service) > 0:
-            ans += "国家图书馆提供" + service[0] + "\n"
+            ans += GraphBaseConfig['place']+"提供" + service[0] + "\n"
             # print("aaa",ans)
             room = Neo4jPrepare.get_relation(service[0], "馆室")
             if len(room) <= 0:
@@ -618,7 +619,7 @@ class Task_contain():
                 ans += r['office_name'] + ","
             ans += room[-1]['office_name'] + "办理该业务\n"
         else:
-            ans += "很抱歉，国家图书馆不能办理该业务"
+            ans += "很抱歉，"+GraphBaseConfig['place']+"不能办理该业务"
         return ans
 
     """
@@ -628,7 +629,7 @@ class Task_contain():
     def solve_service_exit_all(self):
 
         res = Neo4jPrepare.get_entity('服务')
-        ans = "\n国家图书馆提供的服务包括"
+        ans = "\n"+GraphBaseConfig['place']+"提供的服务包括"
         for sub_result in res[:-1]:
             ans += sub_result['office_name']+","
         ans += res[-1]['office_name']+"\n"
@@ -653,7 +654,7 @@ class Task_contain():
     查出国图资源分布，即查出国图所有馆区所包含的资源
     """
     def solve_library_res(self):
-        res = Neo4jPrepare.get_relation("国家图书馆","馆区")
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'],"馆区")
         ans = ""
         for r in res:
             area_dict = {'area':[r['office_name']]}
@@ -746,28 +747,3 @@ class Task_contain():
             ans += sub_room + ","
         ans += room_arr[-1] + "\n"
         return ans
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

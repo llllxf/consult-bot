@@ -115,15 +115,3 @@ class Task_time2():
         if res['weektime']!='nan':
             ans += "周末开放是时间为"+res['weektime']+"\n"
         return ans
-
-
-
-
-
-
-
-
-
-
-
-

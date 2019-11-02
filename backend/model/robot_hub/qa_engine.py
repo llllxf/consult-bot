@@ -62,6 +62,7 @@ class GeneralHub():
             cls.user.set_age(20)
             cls.user.set_sex('女')
 
+
         question_str = cls.nlp_util.clear_question(question_str)
         question_str = cls.clear_util.filter(question_str)
         if '*' in question_str:
