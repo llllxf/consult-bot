@@ -10,7 +10,6 @@ class zhcnSeg(object):
     current_path = os.path.dirname(__file__)
     stopword_filepath = current_path+"/stopword.txt"
 
-
     def __init__(self):
         self.read_in_stopword()
 

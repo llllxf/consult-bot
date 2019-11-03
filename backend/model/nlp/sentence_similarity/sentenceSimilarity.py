@@ -44,9 +44,10 @@ class SentenceSimilarity():
         self.texts = [[token for token in text if frequency[token] > min_frequency] for text in self.texts]
 
         self.dictionary = corpora.Dictionary(self.texts)
-        print(self.dictionary)
+        #print(self.dictionary)
         self.corpus_simple = [self.dictionary.doc2bow(text) for text in self.texts]
-        print(self.corpus_simple)
+        #for i in range(len(self.corpus_simple)):
+        #    print(self.corpus_simple[i],self.texts[i])
 
     # tfidf模型
     def TfidfModel(self):
