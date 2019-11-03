@@ -633,6 +633,12 @@
         </template>
     </category>
     <category>
+        <pattern>#办#卡#</pattern>
+        <template>
+            请问办卡人的具体年龄是几岁？A已满十六岁 B十三到十五岁 C未满十三岁
+        </template>
+    </category>
+    <category>
         <pattern>#想#办#卡#</pattern>
         <template>
             请问办卡人的具体年龄是几岁？A已满十六岁 B十三到十五岁 C未满十三岁
@@ -792,7 +798,7 @@
     <!-- 退押金 -->
     <!-- ========================================================== -->
     <category>
-        <pattern>退押金</pattern>
+        <pattern>#退押金#</pattern>
         <template>
             请问押金收据是否还在？
         </template>
