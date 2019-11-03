@@ -43,7 +43,7 @@ class MainHandler(tornado.web.RequestHandler):
                 print(graph_respons[0])
 
                 res_dict = {'first': str(graph_respons[0])}
-                if graph_respons[0].find('很抱歉')!=-1 or graph_respons[0] == '':
+                if str(graph_respons[0]).find('很抱歉')!=-1 or graph_respons[0] == '':
                     with open("question.txt",'a') as fw:
                         fw.writelines(question_str)
                         fw.writelines("\n")
@@ -54,7 +54,6 @@ class MainHandler(tornado.web.RequestHandler):
                 res_dict = {'first':'收到'}
 
             res_json = json.dumps(res_dict)
-            #print(res_json)
             self.write(res_json)
 
         elif target == 'recognition':
