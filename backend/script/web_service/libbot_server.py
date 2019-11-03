@@ -42,7 +42,7 @@ class MainHandler(tornado.web.RequestHandler):
             elif len(graph_respons)==1:
 
                 res_dict = {'first': str(graph_respons[0])}
-                if '很抱歉，我还在学习中，暂时无法解答这个问题' in graph_respons[0] or graph_respons[0] == '':
+                if '很抱歉我还在学习中，暂时回答不了这个问题' == graph_respons[0] or graph_respons[0] == '':
                     with open("question.txt",'a') as fw:
                         fw.writelines(question_str)
                         fw.writelines("\n")
