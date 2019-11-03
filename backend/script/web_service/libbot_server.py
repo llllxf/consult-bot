@@ -21,6 +21,7 @@ graph_qa_hub = GeneralHub()
 class MainHandler(tornado.web.RequestHandler):
 
 
+
     def post(self):
 
         target = self.get_argument("target")
@@ -28,20 +29,29 @@ class MainHandler(tornado.web.RequestHandler):
         post_data = json.loads(self.request.body,strict=False)
 
         if target == 'graph_qa':
+
             question_str = post_data['question']
-            #question_str = question_str.decode('utf-8')
             question_str = NLPUtil.clear_question(question_str)
-            #print(question_str)
-            #print(GeneralHub.age)
+
             graph_respons = graph_qa_hub.question_answer_hub(question_str)
-            #print(graph_respons[0])
+
             if question_str == None or question_str == '':
                 res_dict = {'first':'我没听清，请您再说一遍'}
-            elif len(graph_respons)>1:
-                #print(graph_respons)
+            elif len(graph_respons)==2:
                 res_dict = {'first': str(graph_respons[0]),'second':graph_respons[1]}
             elif len(graph_respons)==1:
+
                 res_dict = {'first': str(graph_respons[0])}
+                if '很抱歉，我还在学习中，暂时无法解答这个问题' in graph_respons[0] or graph_respons[0] == '':
+                    with open("question.txt",'a') as fw:
+                        fw.writelines(question_str)
+                        fw.writelines("\n")
+            elif len(graph_respons) == 3:
+                with open("question.txt", 'a') as fw:
+                    fw.writelines(graph_respons[0])
+                    fw.writelines("\n")
+                res_dict = {'first':'收到'}
+
             res_json = json.dumps(res_dict)
             #print(res_json)
             self.write(res_json)
@@ -60,7 +70,6 @@ class MainHandler(tornado.web.RequestHandler):
                 sex = None
             if img == '未知':
                 img = None
-            #print(img)
 
             import base64,datetime
             img_data = base64.b64decode(img)

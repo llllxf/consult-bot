@@ -45,6 +45,8 @@ class GeneralHub():
         cls.intent = IntentUtil()
         #cls.dialog_util = DialogLog()
         cls.clear_util = ClearUtil("../../resource/sensitiveness/keyword.txt")
+        cls.last_question = ''
+        print("================")
 
     @classmethod
     def set_user(cls,user):
@@ -57,6 +59,9 @@ class GeneralHub():
         :param question_str:问句输入
         :return:
         """
+
+        print("================222")
+
         if cls.user == None:
             cls.user = User()
             cls.user.set_age(20)
@@ -67,6 +72,11 @@ class GeneralHub():
         question_str = cls.clear_util.filter(question_str)
         if '*' in question_str:
             return ['很抱歉，请您注意文明用语']
+        print(question_str)
+        if question_str == '不对':
+            return [cls.last_question,'q','q']
+        cls.last_question = question_str
+        print("cls.last_question",cls.last_question)
         aiml_response = ''
         aiml_response_normal = ''
         aiml_response_specify = ''
