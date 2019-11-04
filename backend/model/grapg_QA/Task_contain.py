@@ -138,6 +138,7 @@ class Task_contain():
     """
 
     def solve_restype_area(self, entity):
+        print(entity)
         ans = "\n"
         area = entity['area'][0]
 
@@ -168,6 +169,28 @@ class Task_contain():
     """
 
     def solve_restype_library(self, entity):
+
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'], "馆区")
+        ans = ""
+        entity['area'] = [res[0]['office_name']]
+        temp = self.solve_restype_area(entity)
+        if '不' in temp.split("\n")[1]:
+            pass
+        else:
+            ans += temp.split("\n")[1]
+            return ans
+        for r in res[1:]:
+            #area_dict = {'area': [r['office_name']]}
+            entity['area'] = [r['office_name']]
+            temp = self.solve_restype_area(entity)
+            if '不' in temp.split("\n")[1]:
+                pass
+            else:
+                ans += temp.split("\n")[1]
+                return ans
+
+        """
+
         ans = ""
         entity['area'] = ['总馆北区']
         temp = self.solve_restype_area(entity)
@@ -177,7 +200,6 @@ class Task_contain():
         else:
             ans += temp.split("\n")[1]
             return ans
-
         entity['area'] = ['总馆南区']
         temp = self.solve_restype_area(entity)
         if '不' in temp.split("\n")[1]:
@@ -201,6 +223,8 @@ class Task_contain():
         else:
             ans += temp.split("\n")[1]
             return ans
+        """
+
 
         return ans
 
@@ -278,6 +302,18 @@ class Task_contain():
 
     def solve_multype_library(self, entity):
 
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'], "馆区")
+        ans = ""
+        entity['area'] = [res[0]['office_name']]
+        ans += self.solve_multype_area(entity)
+        for r in res[1:]:
+            #area_dict = {'area': [r['office_name']]}
+            entity['area'] = [r['office_name']]
+            temp = self.solve_multype_area(entity)
+            temp = temp.split("\n")[1]
+            ans += temp + "\n"
+        return ans
+        """
         ans = ""
         entity['area'] = ['总馆北区']
         ans += self.solve_multype_area(entity)
@@ -294,12 +330,14 @@ class Task_contain():
         temp = temp.split("\n")[1]
         ans += temp
         return ans
+        """
+
 
     """
     查看国图有么有某中类
     """
     def solve_ttype_library(self, entity):
-
+        """
         ans = ""
         entity['area'] = ['总馆北区']
         ans += self.solve_ttype_area(entity)
@@ -315,6 +353,18 @@ class Task_contain():
         temp = self.solve_ttype_area(entity)
         temp = temp.split("\n")[1]
         ans += temp
+        return ans
+        """
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'], "馆区")
+        ans = ""
+        entity['area'] = [res[0]['office_name']]
+        ans += self.solve_ttype_area(entity)
+        for r in res[1:]:
+            #area_dict = {'area': [r['office_name']]}
+            entity['area'] = [r['office_name']]
+            temp = self.solve_ttype_area(entity)
+            temp = temp.split("\n")[1]
+            ans += temp + "\n"
         return ans
 
     """
@@ -544,6 +594,19 @@ class Task_contain():
         #print(res)
         l = len(res)
         ans = "\n"+area+"一共有"+str(l)+"层\n"
+        return ans
+
+    """
+    图书馆有几楼的
+    """
+
+    def solve_count_floor_library(self):
+
+        res = Neo4jPrepare.get_relation(GraphBaseConfig['place'], "馆区")
+        ans = ""
+        for r in res:
+            area_dict = {'area': [r['office_name']]}
+            ans += self.solve_count_floor(area_dict)
         return ans
 
     """

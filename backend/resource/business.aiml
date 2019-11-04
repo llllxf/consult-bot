@@ -863,7 +863,7 @@
         </template>
     </category>
     <category>
-        <pattern>#不#</pattern>
+        <pattern>#不在#</pattern>
         <that>请问押金收据是否还在？</that>
         <template>
             请先挂失。在履行相应的手续后，由本人持有效身份证件原件及复印件取回押金；若委托他人办理无押金收据退押金时，还需同时提交代理人的有效身份证原件及复印件。是否需要咨询办证处在哪？

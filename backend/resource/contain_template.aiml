@@ -1,5 +1,31 @@
 <aiml version="1.0.1" encoding="UTF-8">
 <!-- floor_chat.aiml -->
+    <!-- 图书馆层数 -->
+    <category>
+        <pattern>#LIBRARY#多少#层#</pattern>
+        <template>
+            task_count_floor_library_contain
+        </template>
+    </category>
+    <category>
+        <pattern>#LIBRARY#几#层#</pattern>
+        <template>
+            task_count_floor_library_contain
+        </template>
+    </category>
+    <category>
+        <pattern>#LIBRARY#多少#楼#</pattern>
+        <template>
+            task_count_floor_library_contain
+        </template>
+    </category>
+    <category>
+        <pattern>#LIBRARY#几#楼#</pattern>
+        <template>
+            task_count_floor_library_contain
+        </template>
+    </category>
+
     <!-- 馆室层数 -->
     <category>
         <pattern>#AREA#多少#层#</pattern>
@@ -557,19 +583,7 @@
 
     <!-- 国家图书馆馆区-->
     <category>
-        <pattern>#LIBRARY*馆舍#</pattern>
-        <template>
-           task_library_area_contain
-        </template>
-    </category>
-    <category>
-        <pattern>#LIBRARY*馆室#</pattern>
-        <template>
-           国家图书馆包括临琼楼,文津楼,总馆南区,总馆北区,馆室众多，具体可以询问馆区的馆室
-        </template>
-    </category>
-    <category>
-        <pattern>#LIBRARY*馆区#</pattern>
+        <pattern>#LIBRARY*馆#</pattern>
         <template>
            task_library_area_contain
         </template>
@@ -760,6 +774,7 @@
     </category>
 
     <!-- 音乐电影 -->
+    <!--
     <category>
         <pattern>#电影#</pattern>
         <template>
@@ -796,6 +811,7 @@
            task_music_or_movie_contain
         </template>
     </category>
+    -->
 
     <!-- 服务查询 -->
 
@@ -1069,13 +1085,14 @@
            task_service_area_exit_contain
         </template>
     </category>
-
+    <!--
     <category>
         <pattern>有*吗</pattern>
         <template>
            很抱歉，国家图书馆暂时没有
         </template>
     </category>
+    -->
 
 
 

@@ -96,6 +96,8 @@ class Bot():
             answer = cls.answer_multype_describe(entity_dict)
         elif task == "task_count_floor_contain":
             answer = cls.answer_count_floor(entity_dict)
+        elif task == "task_count_floor_library_contain":
+            answer = cls.answer_count_floor_library()
         elif task == "task_floor_count_room_contain":
             answer = cls.answer_floor_count_room(entity_dict)
         elif task == "task_room_pos":
@@ -110,8 +112,6 @@ class Bot():
             answer = cls.answer_restype_pos(entity_dict)
         elif task == "task_multype_pos":
             answer = cls.answer_multype_pos(entity_dict)
-        elif task == "task_music_or_movie_contain":
-            answer = cls.answer_music_or_movie()
         elif task == "task_library_describe_information":
             answer = cls.answer_library_describe()
         elif task == "task_library_area_contain":
@@ -499,6 +499,12 @@ class Bot():
         return [res]
 
     @classmethod
+    def answer_count_floor_library(cls):
+        task_contain = Task_contain()
+        res = task_contain.solve_count_floor_library()
+        return [res]
+
+    @classmethod
     def answer_floor_count_room(cls, entity_dict):
         task_contain = Task_contain()
         res = task_contain.solve_floor_count_room(entity_dict)
@@ -571,7 +577,7 @@ class Bot():
         task_position = Task_position()
         res = task_position.solve_room_pos(dict)
         return res
-
+    """
     @classmethod
     def answer_music_or_movie(cls):
         dict = {'room': ['视听阅览区']}
@@ -579,6 +585,7 @@ class Bot():
         task_position = Task_position()
         res += task_position.solve_room_pos(dict)[0]
         return [res]
+    """
 
     @classmethod
     def answer_library_describe(cls):

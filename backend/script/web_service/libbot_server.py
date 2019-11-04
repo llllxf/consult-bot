@@ -43,7 +43,7 @@ class MainHandler(tornado.web.RequestHandler):
                 print(graph_respons[0])
 
                 res_dict = {'first': str(graph_respons[0])}
-                if str(graph_respons[0]).find('很抱歉')!=-1 or graph_respons[0] == '':
+                if str(graph_respons[0]).find('抱歉')!=-1 or graph_respons[0] == '':
                     with open("question.txt",'a') as fw:
                         fw.writelines(question_str)
                         fw.writelines("\n")

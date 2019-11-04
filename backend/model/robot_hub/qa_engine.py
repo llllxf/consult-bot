@@ -18,10 +18,11 @@ from model.search_QA import similarQuestionBot
 from model.aiml_cn import AIMLUtil
 from model.nlp import NLPUtil
 from model.pedia.manager import TaskManager
-from model.open_chat.chatterbot_chat import ChatterPolite
+#from model.open_chat.chatterbot_chat import ChatterPolite
 from model.nlp import IntentUtil
 from model.nlp import ClearUtil
 from model.user import User
+import random
 #from model.log import DialogLog
 
 
@@ -41,12 +42,11 @@ class GeneralHub():
         cls.aiml_util = AIMLUtil()
         cls.nlp_util = NLPUtil('ltp_data_v3.4.0')
         cls.search_bot = similarQuestionBot()
-        cls.chat = ChatterPolite.create_chatterbot()
         cls.intent = IntentUtil()
         #cls.dialog_util = DialogLog()
         cls.clear_util = ClearUtil("../../resource/sensitiveness/keyword.txt")
         cls.last_question = ''
-        print("================")
+        cls.sorry = ['哎呀抱歉，暂时回答不了这个问题','很抱歉，我还在学习中，暂时回答不了这个问题','很抱歉，这个问题我还不会']
 
     @classmethod
     def set_user(cls,user):
@@ -59,9 +59,6 @@ class GeneralHub():
         :param question_str:问句输入
         :return:
         """
-
-        print("================222")
-
         if cls.user == None:
             cls.user = User()
             cls.user.set_age(20)
@@ -72,11 +69,11 @@ class GeneralHub():
         question_str = cls.clear_util.filter(question_str)
         if '*' in question_str:
             return ['很抱歉，请您注意文明用语']
-        print(question_str)
+
         if question_str == '不对':
             return [cls.last_question,'q','q']
         cls.last_question = question_str
-        print("cls.last_question",cls.last_question)
+
         aiml_response = ''
         aiml_response_normal = ''
         aiml_response_specify = ''
@@ -134,8 +131,9 @@ class GeneralHub():
                             return [answer]
                         else:
                             cls.intent.reset_intent('chat')
+                            response_index = random.randint(0, 2)
                             #print("cls.chat.get_response(question_str)",cls.chat.get_response(question_str))
-                            graph_response = [cls.chat.get_response(question_str)]
+                            graph_response = [cls.sorry[response_index]]
 
         dialog_dict = {'intent':cls.intent.get_intent(),'question':question_str,'answer':graph_response[0]}
         #print(aiml_response,aiml_response_normal,aiml_response_specify)
